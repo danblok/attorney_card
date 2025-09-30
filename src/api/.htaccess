@@ -1,0 +1,11 @@
+RewriteEngine On
+
+# Перенаправляем все запросы в этой директории на index.php
+# Кроме самого index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !^/ac/api/index\.php$
+RewriteRule ^(.*)$ index.php [L,QSA]
+
+# Отключаем обработку Битрикс для этой папки
+DirectoryIndex index.php

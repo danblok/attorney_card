@@ -1,43 +1,37 @@
 <script setup lang="ts">
-import { inject, ref } from "vue"
-import { useFormStore } from "@/stores"
+import { useStore } from "@/stores"
 import type { PrivateRepresentative } from "@/types"
+import { Helper } from "@/lib/helper"
+import { onMounted } from "vue"
 
-const formStore = useFormStore()
-const form = formStore.form
-const formRef = inject("form-ref")
+const store = useStore()
+const reprs = store.project.privateRepresentatives
 
 function createEmptyPrivateSection() {
-    const empty: PrivateRepresentative = {
-        id: 0,
-        reprId: 0,
-        isGardiaEmployee: false,
-        firstName: "",
-        lastName: "",
-        secondName: "",
-        position: "",
-        passportIssuedBy: "",
-        passportIssuedDate: new Date().toDateString(),
-        divisionCode: "",
-        registrationAddress: "",
-        additionalInfo: "",
-        passportSeries: "",
-        passportNumber: "",
-    }
+    const empty = Helper.createPrivateRepresentative()
 
-    form.privateRepresentatives.push(empty)
+    reprs.push(empty)
 }
+
+onMounted(() => {
+    console.log("privates section reprs:", reprs)
+})
 </script>
 <template>
-    <template v-for="(repr, idx) in form.privateRepresentatives" :key="repr.id">
+    <template v-for="(repr, idx) in reprs" :key="repr.id">
         <private-section
-            v-model="form.privateRepresentatives[idx]"
-            @remove="form.privateRepresentatives.splice(idx, 1)"
+            :value="repr"
+            @update="
+                (repr: PrivateRepresentative) => {
+                    reprs[idx] = repr
+                }
+            "
+            @remove="reprs.splice(idx, 1)"
         />
     </template>
-    <el-button type="primary" @click="createEmptyPrivateSection"
-        >Добавить представителя по доверенности</el-button
-    >
+    <el-button type="primary" @click="createEmptyPrivateSection">
+        Добавить представителя по доверенности
+    </el-button>
 </template>
 
 <style scoped></style>

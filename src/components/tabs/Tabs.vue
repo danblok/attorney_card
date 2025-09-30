@@ -1,5 +1,22 @@
+<script lang="ts" setup>
+import { ref, watchEffect } from "vue"
+
+import { useStore } from "@/stores"
+
+const store = useStore()
+const activeTab = ref("AttorneyRepresentative")
+const form = store.project
+
+watchEffect(
+    () => {
+        console.log("form state:", form)
+    },
+    { flush: "post" },
+)
+</script>
+
 <template>
-    <el-form :model="form" :ref="formRef" label-position="top" class="form">
+    <el-form :model="form" label-position="top" class="form">
         <el-tabs v-model="activeTab" type="border-card" class="tabs">
             <el-tab-pane
                 label="Данные представителя по доверенности"
@@ -10,8 +27,8 @@
             <el-tab-pane label="Данные доверенности" name="AttorneyData">
                 <attorney-data-tab></attorney-data-tab>
             </el-tab-pane>
-            <el-tab-pane label="Полномочия" name="PowersOfAttorney">
-                <powers-of-attorney-tab></powers-of-attorney-tab>
+            <el-tab-pane label="Полномочия" name="Authorities">
+                <authorities-tab></authorities-tab>
             </el-tab-pane>
             <el-tab-pane label="Функции" name="Actions">
                 <actions-tab></actions-tab>
@@ -19,27 +36,6 @@
         </el-tabs>
     </el-form>
 </template>
-
-<script lang="ts" setup>
-import { provide, ref, watch, watchEffect } from "vue"
-
-import type { FormInstance } from "element-plus"
-import { useFormStore } from "@/stores"
-
-const activeTab = ref("AttorneyRepresentative")
-const formRef = ref<FormInstance>()
-const formStore = useFormStore()
-const form = formStore.form
-
-watchEffect(
-    () => {
-        console.log("form state:", form)
-    },
-    { flush: "post" },
-)
-
-provide("form-ref", formRef)
-</script>
 
 <style>
 .form {

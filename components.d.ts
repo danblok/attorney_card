@@ -11,6 +11,7 @@ declare module 'vue' {
     ActionsTab: typeof import('./src/components/tabs/ActionsTab.vue')['default']
     AttorneyDataTab: typeof import('./src/components/tabs/AttorneyDataTab.vue')['default']
     AttorneyRepresentativeTab: typeof import('./src/components/tabs/AttorneyRepresentativeTab.vue')['default']
+    AuthoritiesTab: typeof import('./src/components/tabs/AuthoritiesTab.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCard: typeof import('element-plus/es')['ElCard']
     ElCheckbox: typeof import('element-plus/es')['ElCheckbox']
@@ -19,18 +20,20 @@ declare module 'vue' {
     ElFormItem: typeof import('element-plus/es')['ElFormItem']
     ElInput: typeof import('element-plus/es')['ElInput']
     ElInputNumber: typeof import('element-plus/es')['ElInputNumber']
+    ElOption: typeof import('element-plus/es')['ElOption']
     ElSelect: typeof import('element-plus/es')['ElSelect']
     ElSpace: typeof import('element-plus/es')['ElSpace']
     ElTabPane: typeof import('element-plus/es')['ElTabPane']
     ElTabs: typeof import('element-plus/es')['ElTabs']
     ElUpload: typeof import('element-plus/es')['ElUpload']
     LegalSection: typeof import('./src/components/sections/LegalSection.vue')['default']
-    LegalView: typeof import('./src/components/views/LegalView.vue')['default']
-    PowersOfAttorneyTab: typeof import('./src/components/tabs/PowersOfAttorneyTab.vue')['default']
     PrivateSection: typeof import('./src/components/sections/PrivateSection.vue')['default']
     PrivatesSection: typeof import('./src/components/sections/PrivatesSection.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Tabs: typeof import('./src/components/tabs/Tabs.vue')['default']
+  }
+  export interface GlobalDirectives {
+    vLoading: typeof import('element-plus/es')['ElLoadingDirective']
   }
 }

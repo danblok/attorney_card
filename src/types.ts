@@ -1,19 +1,28 @@
+import type { UploadUserFile } from "element-plus"
+
 export interface FormModel {
-    representativeType: "private" | "legal"
+    id: string
+    subjectId: string
     privateRepresentatives: PrivateRepresentative[]
     legalRepresentative: LegalRepresentative
     attorneyData: AttorneyData
-    powersOfAttorney: PowersOfAttorney
+    authorities: Authorities
+}
+
+export interface Project extends FormModel {
+    status: string
+    isCancelled: boolean
+    isReadonly: boolean
 }
 
 export interface PrivateRepresentative {
-    id: number
-    reprId: number
-    isGardiaEmployee: boolean
+    id: string
     firstName: string
     lastName: string
     secondName: string
     position: string
+    externalId: string
+    isGardiaEmployee: boolean
     passportIssuedBy: string
     passportIssuedDate: string
     divisionCode: string
@@ -24,47 +33,74 @@ export interface PrivateRepresentative {
 }
 
 export interface LegalRepresentative {
-    id: number
-    reprId: number
-    fullName: string
-    shortName: string
-    ogrn: string
-    inn: string
-    legalAddress: string
-    reprFirstName: string
-    reprLastName: string
-    reprSecondName: string
-    reprPosition: string
-    basePowersDoc: string
+    company: Company
+    representative: Contact
+    basePowerDocument: string
 }
 
 export interface AttorneyData {
     internalNumber: string
     externalNumber: string
     status: string
-    initiator: string
     department: string
-    reprId: number
-    firstName: string
-    lastName: string
-    secondName: string
-    position: string
+    initiator: User
+    executiveAuthority: User
     issueDate: string
     startDate: string
     endDate: string
     isNotarialPowerOfAttorney: boolean
-    issueForm: number
-    template: number
+    issueForm: string
+    template: string
     file: string
     copiesCount: number
-    releaseSystem: string
+    system: string
     justification: string
     activityArea: string
     additionalInfo: string
 }
 
-export interface PowersOfAttorney {
-    powers: string[]
-    powersFreeForm: string
-    isPowersInFreeForm: boolean
+export interface Authorities {
+    values: string[]
+    freeForm: string
+    isAuthoritiesInFreeForm: boolean
 }
+
+type BaseEntity = {
+    id: string
+    value: string
+}
+
+export type Template = BaseEntity
+export type Form = BaseEntity
+export type Subject = BaseEntity
+export type SystemEntity = BaseEntity
+export type ActivityArea = BaseEntity
+export type Authority = BaseEntity
+export type Status = BaseEntity
+
+export type Company = {
+    id: string
+    fullName: string
+    shortName: string
+    ogrn: string
+    inn: string
+    address: string
+}
+
+export type Contact = {
+    id: string
+    firstName: string
+    lastName: string
+    secondName: string
+    position: string
+}
+
+export interface User {
+    id: string
+    firstName: string
+    lastName: string
+    secondName: string
+    position: string
+}
+
+export type LoadingStatus = "loading" | "finished"
