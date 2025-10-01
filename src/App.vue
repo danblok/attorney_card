@@ -50,7 +50,7 @@ onMounted(async () => {
         if (!store.project.attorneyData.executiveAuthority?.id) {
             store.project.attorneyData.executiveAuthority = store.director
         }
-        if (!store.project.attorneyData.initiator?.id) {
+        if (store.project.attorneyData.initiator.id.startsWith("UM")) {
             store.project.attorneyData.initiator = store.currentUser
         }
 

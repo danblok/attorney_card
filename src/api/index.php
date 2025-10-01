@@ -1183,6 +1183,8 @@ class API
 
                 $fields['executiveAuthority'] = $this->formatUser($this->getUserById((int) $fields['UF_CRM_21_1750401106']));
 
+                $fields['initiator'] = $this->formatUser($this->getUserById((int) $fields['UF_CRM_21_1749039569']));
+
                 $this->sendSuccess($this->formatProject($fields));
             } else {
                 $this->sendError("Не удалось найти элемент из смарт-процесса с ID $entityTypeId с $itemId");
@@ -1219,7 +1221,7 @@ class API
             'isCancelled' => (bool) $project['UF_CRM_21_1752844977'], // Флаг: Проект отменён
             'isReadonly' => (bool) $project['UF_CRM_21_1756734803'], // Флаг: Только просмотр
             'attorneyData' => [
-                'initiator' => (string) $project['UF_CRM_21_1749039569'], // Инициатора
+                'initiator' => $project['initiator'], // Инициатор
                 'file' => (string) $project['UF_CRM_21_1749041076'], // Файл
                 'internalNumber' => (string) $project['UF_CRM_21_1750312821'], // Внутренний номер
                 'externalNumber' => (string) $project['UF_CRM_21_1750312953'], // Внешний номер

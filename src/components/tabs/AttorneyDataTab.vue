@@ -14,11 +14,6 @@ watchEffect(() => {
 })
 
 onMounted(async () => {
-    console.log(
-        "fetch file info id:",
-        form.attorneyData.file.length,
-        typeof form.attorneyData.file,
-    )
     if (form.attorneyData.file) {
         await store.fetchFileInfo(form.attorneyData.file)
         uploadedFiles.value = [store.file!]
@@ -63,8 +58,9 @@ function handleFileUpload(res: FileUploadResponse) {
             <el-form-item label="Инициатор" class="min-w-3xs">
                 <el-select
                     v-model="form.attorneyData.initiator"
-                    disabled
                     placeholder=""
+                    value-key="id"
+                    disabled
                 >
                     <el-option
                         v-for="item in store.users"
