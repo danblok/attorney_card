@@ -1179,7 +1179,7 @@ class API
                 }
 
                 $fields['company'] = $this->formatCompany($this->getCompanyById((int) $fields['UF_CRM_21_1750400866']));
-                $fields['legalRepresentative'] = $this->formatContactToRepresentative($this->getContactById((int) $fields['UF_CRM_21_1750669595']));
+                $fields['legalRepresentative'] = $this->formatContact($this->getContactById((int) $fields['UF_CRM_21_1750669595']));
 
                 $fields['executiveAuthority'] = $this->formatUser($this->getUserById((int) $fields['UF_CRM_21_1750401106']));
 

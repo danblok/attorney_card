@@ -91,7 +91,7 @@ export class Helper {
     public static createLegalRepresentative() {
         return {
             company: this.createCompany(),
-            representative: this.createPrivateRepresentative(),
+            representative: this.createUser(),
             basePowerDocument: "",
         } as LegalRepresentative
     }

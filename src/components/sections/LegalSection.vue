@@ -55,7 +55,7 @@ watchEffect(() => {
                 clearable
                 filterable
                 value-key="id"
-                :value-on-clear="Helper.createPrivateRepresentative()"
+                :value-on-clear="Helper.createUser()"
             >
                 <el-option
                     v-for="item in store.contacts"
